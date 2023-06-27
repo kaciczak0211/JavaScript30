@@ -26,6 +26,21 @@
     /*
       misc styles, nothing to do with CSS variables
     */
+    :root{
+      --base:#ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img{
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    h1{
+      color: var(--base);
+    }
 
     body {
       text-align: center;
@@ -46,6 +61,21 @@
   </style>
 
   <script>
+    // create nodelist! , nodelist doesnt have much methods like array,
+    // sometimes its good to convert nodelist to array
+    const inputs = document.querySelectorAll('.controls input')
+
+    function update(){
+      // console.log(this.value);
+      const suffix = this.dataset.sizing || '';
+      // console.log(suffix);
+      // console.log(this.name);
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+    }
+
+    inputs.forEach(input =>input.addEventListener('change', update));
+    inputs.forEach(input =>input.addEventListener('mousemove', update));
+
   </script>
 
 </body>
